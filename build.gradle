@@ -19,24 +19,35 @@ repositories {
 }
 
 dependencies {
-	runtimeOnly 'org.apache.tomcat.embed:tomcat-embed-core:9.0.65'
-	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+	// Базовые зависимости Spring Boot
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5' // API зависимость
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5' // Реализация зависимость
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // Зависимость для сериализации
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// JWT зависимости
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// Зависимость для работы с базой данных PostgreSQL
 	runtimeOnly 'org.postgresql:postgresql'
+
+	// Jakarta Servlet API (попробуйте оставить только её без javax.servlet)
+	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+	// Инструменты для разработки
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Lombok для упрощения кода
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// Зависимости для тестирования
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()
